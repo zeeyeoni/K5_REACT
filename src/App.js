@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+// import Frcst from './07/Frcst';
+import Gallery from './10/Gallery';
 import './App.css';
+// import LogoMain from './01/LogoMain';
+// import ClockMain from './02/ClockMain';
+// import FrontEnd from './03/FrontEnd';
+// import Lotto from './05/Lotto';
+// import BoxOffice from './06/BoxOffice';
+// import RefTest from './08/RefTest';
+// import Traffic from './09/Traffic';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Component(= 함수) 이름은 대문자로 시작 해야 한다.
+    // view로 나갈 return이 무조건 존재해야 함, return 루트 태그 하나만 나가야함(부모노드 하나만 가능, 자식노드는 여러개 가능)
+    // class는 예약어가 있기 때문에 사용 x, className 사용하기   
+
+    // 중간에 아무것도 적을게 없을때만 <~~~/>
+    // <LogoMain />
+    // <ClockMain />
+    // <FrontEnd />
+    // <Lotto />
+    // <BoxOffice />
+    // <Frcst />
+    // <RefTest />
+    // <Traffic />
+    <Gallery />
   );
 }
 

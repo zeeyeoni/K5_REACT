@@ -1,0 +1,107 @@
+article {
+  background-color: lightgoldenrodyellow;
+}
+
+* {
+  /* 인라인은 margin, padding 없음 */
+  /* 바깥쪽 여백 */
+  margin: 0px;
+  /* 안쪽 여백 */
+  padding: 0px;
+}
+
+main {
+  background-color: aliceblue;
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 60%;
+}
+
+header {
+  padding: 50px;
+  background-color: lemonchiffon
+}
+
+header > h1 {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+
+
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  list-style-type: none;
+}
+
+li {
+  width: 80px;
+  background-color: lavender;
+  color: lavender;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  padding: 10px 5px;
+  border-radius: 25px;
+}
+/* 바로 밑에 있는 자손 아니면 공백처리 */
+nav a {
+  text-decoration: none;
+  color: plum;
+}
+section, article {
+  margin: 30px;
+  color: gray;
+  padding: 10px;
+  border-inline-color: gray;
+}
+section > p {
+  margin-top: 20px;
+}
+
+article > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divimg {
+  width: 30%;
+  text-align: center;
+}
+
+article p {
+  width: 70%;
+  margin-left: 40px;
+  /* background-color: antiquewhite; */
+}
+
+/* == article > div > img */
+article img {
+  border-radius: 50%;
+}
+
+footer {
+  background-color: wheat;
+  color: white;
+}
+
+footer > div {
+  margin: 25px;
+  padding: 25px;
+}
+
+footer p {
+  text-align: center;
+}
+
+.footer_p_1 {
+  margin: 5px;
+}
+
+.footer_p_2 {
+  font-size: small;
+}
