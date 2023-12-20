@@ -7,7 +7,7 @@ export default function TailCard({ imgSrc, title, subtitle, tags }) {
       </span>
     )
 
-    sps.length === 0 ? '' : sps
+    sps = sps.length === 0 ? '' : sps;
 
     return (
       <div className="max-w-sm rounded overflow-hidden shadow-lg">
