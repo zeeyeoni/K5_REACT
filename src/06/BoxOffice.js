@@ -21,15 +21,15 @@ export default function BoxOffice() {
     console.log(url);
 
     fetch(url)
-    .then(resp => resp.json())
-    .then(data => setboxlist(data.boxOfficeResult.dailyBoxOfficeList))
-    .catch(err => console.log(err))
+      .then(resp => resp.json())
+      .then(data => setboxlist(data.boxOfficeResult.dailyBoxOfficeList))
+      .catch(err => console.log(err))
 
   };
 
   // 어제 날짜를 구해서 getFetch
   useEffect(() => {
-    
+
     let tmYeterday = new Date();
     tmYeterday.setDate(tmYeterday.getDate() - 1);
     console.log(tmYeterday);
@@ -39,7 +39,7 @@ export default function BoxOffice() {
     setYesterday(tmYeterday);
     console.log(tmYeterday);
     getFetchData(tmYeterday.replaceAll('-', ''))
-    
+
   }, []);
 
 
@@ -57,37 +57,37 @@ export default function BoxOffice() {
 
   // }
 
-  
+
 
   // boxlist 변경 시 실행
   useEffect(() => {
 
-    (boxlist === undefined) ? 
-    setTrs(
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>) :
-    setTrs(boxlist.map((item) =>
+    (boxlist === undefined) ?
+      setTrs(
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>) :
+      setTrs(boxlist.map((item) =>
 
-      <tr key={item.movieCd} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 hover:font-extrabold dark:hover:bg-gray-600">
-        <td className="px-6 py-4">
-          <span className="inline-flex justify-center items-center w-5 h-5 bg-slate-500 text-white m-5">{item.rank}</span>{item.movieNm}
+        <tr key={item.movieCd} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 hover:font-extrabold dark:hover:bg-gray-600">
+          <td className="px-6 py-4">
+            <span className="inline-flex justify-center items-center w-5 h-5 bg-slate-500 text-white m-5">{item.rank}</span>{item.movieNm}
           </td>
-        <td className="px-6 py-4">
-          {parseInt(item.salesAcc).toLocaleString("ko-KR")}원
+          <td className="px-6 py-4">
+            {parseInt(item.salesAcc).toLocaleString("ko-KR")}원
           </td>
-        <td className="px-6 py-4">
-          {parseInt(item.audiCnt).toLocaleString("ko-KR")}명
+          <td className="px-6 py-4">
+            {parseInt(item.audiCnt).toLocaleString("ko-KR")}명
           </td>
-        <td className="px-6 py-4">
-          {
-          (parseInt(item.rankInten) > 0) ? <span className="text-red-600">▲{item.rankInten}</span> : <span className="text-sky-600">▼{Math.abs(item.rankInten)}</span>
-          }
+          <td className="px-6 py-4">
+            {
+              (parseInt(item.rankInten) > 0) ? <span className="text-red-600">▲{item.rankInten}</span> : <span className="text-sky-600">▼{Math.abs(item.rankInten)}</span>
+            }
           </td>
-      </tr>)
-  );
+        </tr>)
+      );
   }, [boxlist]);
 
   return (
@@ -98,14 +98,14 @@ export default function BoxOffice() {
           <TailH1 title="박스오피스" />
 
           <div className="flex m-4">
-          <label htmlFor="dt">날짜 선택</label>
-          <input type="date" 
-                id="dt" 
-                max={yeterday} 
-                ref = {rfDate}
-                onChange={handleDtChange}
+            <label htmlFor="dt">날짜 선택</label>
+            <input type="date"
+              id="dt"
+              max={yeterday}
+              ref={rfDate}
+              onChange={handleDtChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"
-          />
+            />
           </div>
         </div>
         <div className="relative overflow-x-auto w-3/4 shadow-md sm:rounded-lg">

@@ -1,6 +1,10 @@
 // import Frcst from './07/Frcst';
-import Gallery from './10/Gallery';
+// import Gallery from './10/Gallery';
+// import BusanFestival from './11/BusanFestival';
+// import Rmain from './12/Rmain';
+import Fcst from './13/Fcst';
 import './App.css';
+
 // import LogoMain from './01/LogoMain';
 // import ClockMain from './02/ClockMain';
 // import FrontEnd from './03/FrontEnd';
@@ -8,6 +12,7 @@ import './App.css';
 // import BoxOffice from './06/BoxOffice';
 // import RefTest from './08/RefTest';
 // import Traffic from './09/Traffic';
+
 
 function App() {
   return (
@@ -24,7 +29,10 @@ function App() {
     // <Frcst />
     // <RefTest />
     // <Traffic />
-    <Gallery />
+    // <Gallery />
+    // <BusanFestival />
+    // <Rmain />
+    <Fcst />
   );
 }
 
