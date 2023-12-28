@@ -5,16 +5,46 @@ import { useEffect, useRef, useState } from 'react';
 import TailSelect from '../UI/TailSelect';
 import TailBlueButton from '../UI/TailBlueButton';
 
-export default function Fcst() {
+export default function Fcst_1() {
     // !!!!! useState 정보가 바뀔 때만 사용하고, 지정된 정보일 경우 바로 뿌려주기
 
-    const selectLocation = weather.map(item => item[`1단계`]);
+    // 전체 데이터 담는 곳
+    const [totalData, setTotalData] = useState([]);
+    // 선택한 날짜 담는 곳
+    const [selectDate, setSelectDate] = useState([]);
+    // 선택한 지역 담는 곳
+    const [selectLocation, setSelectLocation] = useState([]);
+    // 선택한 날짜 
+    const refDate = useRef();
 
     // !!!!! 바로 selectBox에 넣어주면 됨, Effect 필요 없음
+    const getData = () => {
+
+        const data = weather;
+
+        setTotalData(data);
+        console.log(data);
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    useEffect(()=> {
+
+        let tm = totalData.map(item => item[`1단계`])
+
+        // 1단계는 중복되는 부분이 없어서 set에 
+        tm = new Set(tm);
+
+        tm = [...tm].sort();
+
+        setSelectLocation(tm);
+
+    }, [totalData])
 
 
-    const handleDateChange = () => {
-
+    const handleDateChange = (e) => {
         console.log(refDate.current.value);
     }
 

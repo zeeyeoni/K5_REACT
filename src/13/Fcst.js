@@ -1,91 +1,65 @@
-import TailH1 from '../UI/TailH1';
-import { FcLandscape } from "react-icons/fc";
-import weather from "../13/getxy.json";
-import { useEffect, useRef, useState } from 'react';
-import TailSelect from '../UI/TailSelect';
-import TailBlueButton from '../UI/TailBlueButton';
+import TailBlueButton from "../UI/TailBlueButton";
+import TailSelect from "../UI/TailSelect";
+import getxy from "./getxy.json";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 
 export default function Fcst() {
-    // !!!!! useState 정보가 바뀔 때만 사용하고, 지정된 정보일 경우 바로 뿌려주기
+  const area = getxy.map(item => item['1단계']);
+    console.log(area); 
 
-    // 전체 데이터 담는 곳
-    const [totalData, setTotalData] = useState([]);
-    // 선택한 날짜 담는 곳
-    const [selectDate, setSelectDate] = useState([]);
-    // 선택한 지역 담는 곳
-    const [selectLocation, setSelectLocation] = useState([]);
-    // 선택한 날짜 
-    const refDate = useRef();
+  //상태변수
+  const [tag, setTag] = useState('') ;
+  const [dt, setDt] = useState('') ;
+  const [sel, setSel] = useState('') ;
+  
+  //이동 객체 생성
+  const navigate = useNavigate() ;
 
-    // !!!!! 바로 selectBox에 넣어주면 됨, Effect 필요 없음
-    const getData = () => {
-
-        const data = weather;
-
-        setTotalData(data);
-        console.log(data);
-    }
-
-    useEffect(() => {
-        getData();
-    }, [])
-
-    useEffect(()=> {
-
-        let tm = totalData.map(item => item[`1단계`])
-
-        // 1단계는 중복되는 부분이 없어서 set에 
-        tm = new Set(tm);
-
-        tm = [...tm].sort();
-
-        setSelectLocation(tm);
-
-    }, [totalData])
-
-
-    const handleDateChange = () => {
-
-        console.log(refDate.current.value);
-    }
-
-    const handleLocationChange = (e) => {
-        console.log(e.target.value);
-    }
-
-
-    return (
-        <div className="container mx-auto w-full h-screen">
-            <div className='flex flex-col justify-top item-center w-full my-8'>
-                <div className='flex'>
-                    <FcLandscape className='text-4xl mx-5' />
-                    <TailH1 title="단기예보 선택" color='orange' />
-                    <FcLandscape className='text-4xl mx-5' />
-                </div>
-                <div className='grid grid-cols-1 md:grid-cols-2'>
-                    <div className="flex m-7">
-                        <input type="date"
-                            id="date"
-                            ref={refDate}
-                            onChange={handleDateChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"
-                        />
-                    </div>
-                    <div>
-                        <TailSelect optionItem={selectLocation} handleChange={handleLocationChange} />
-                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                        </div>
-                    </div>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                        <div>
-                        <TailBlueButton caption={"초단기예보"} bcolor={'sky'} handleClick={''}/>
-                        </div>
-                        <div>
-                        <TailBlueButton caption={"단기예보"} bcolor={'sky'} handleClick={''}/>
-                        </div>
-                    </div>
-                </div>
+  const handleDt = (e) => {
+    setDt(e.target.value.replaceAll('-','')) ;
+  }
+  const handleSelChange = (e) =>{
+    setSel(e.target.value)
+  }
+ 
+  return (
+   
+      <div className="flex flex-col justify-top items-center w-full my-8">
+        {/* <form name="kform" className="my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4"> */}
+          <div className='flex justify-center items-center mx-4'>
+            <div className="relative max-w-sm">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                </svg>
+              </div>
+              <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 
+                                                        text-sm rounded-lg
+                                                        focus:ring-blue-500 focus:border-blue-500 
+                                                        block w-full ps-10 p-2.5"
+                                                        placeholder="Select date" 
+                                                        onChange={handleDt}/>
             </div>
-        </div>
-    )
+          </div>
+          <div className='flext justify-center items-end'>
+            <TailSelect optionItem ={area}  handleChange={handleSelChange} />
+          </div> 
+          <div className='flext justify-center items-center'>
+            <TailBlueButton caption={"초단기예보"} 
+                        bcolor={"sky"} 
+                        handleClick ={() => navigate(`/detail?gubun=${1}&dt=${dt}&area=${sel}`)} />
+          </div>
+          <div className='flext justify-center items-center'>
+            <TailBlueButton caption={"단기예보"} 
+                        bcolor={"sky"} 
+                        handleClick ={() => navigate(`/detail?gubun=${2}&dt=${dt}&area=${sel}`)} />
+          </div>
+        {/* </form>  */}
+      </div>
+      
+     
+
+  )
 }
